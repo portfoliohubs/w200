@@ -132,6 +132,45 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.Params.logo_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.Params.logo_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.logo_url }}">
+    <link rel="icon" type="image/svg+xml" href="{{ .Site.Params.logo_url }}">
+    <meta name="theme-color" content="#0055BB">
+    
+    <!-- Additional OG Tags -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:image:alt" content="{{ .Site.Params.brand_name }} Logo">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="data:application/json,{%22name%22:%22{{ .Site.Params.brand_name }}%22,%22short_name%22:%22PH%22,%22icons%22:[{%22src%22:%22{{ .Site.Params.logo_url }}%22,%22sizes%22:%22192x192%22,%22type%22:%22image/png%22}],%22theme_color%22:%22#0055BB%22,%22background_color%22:%22#C5D1D5%22,%22display%22:%22standalone%22}">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="application-name" content="{{ .Site.Params.brand_name }}">
+    <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.brand_name }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="msapplication-TileColor" content="#0055BB">
+    <meta name="msapplication-config" content="none">
+    
+    <!-- Logo Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ .Site.Params.brand_name }}",
+        "url": "{{ .Site.BaseURL }}",
+        "logo": "{{ .Site.Params.logo_url }}",
+        "sameAs": [
+            "{{ .Site.Params.contact.facebook }}",
+            "{{ .Site.Params.contact.instagram }}"
+        ]
+    }
+    </script>
+    
     <style>
         :root {
             --bg-color: {{ .Site.Params.colors.background }};
@@ -624,7 +663,10 @@
     <header>
         <nav class="container">
             <a href="#" class="logo">
-                <img src="{{ .Site.Params.logo_url }}" alt="{{ .Site.Params.brand_name }}" loading="lazy">
+                <img src="{{ .Site.Params.logo_url }}" 
+                     alt="{{ .Site.Params.brand_name }}" 
+                     loading="lazy" 
+                     onerror="this.src='https://via.placeholder.com/50x50/0055BB/FFFFFF?text=PH'; this.onerror=null;">
                 {{ .Site.Params.brand_name }}
             </a>
             <ul class="nav-links">
@@ -829,6 +871,28 @@
                     img.src = url;
                 });
             }
+            
+            // Verify logo images
+            const logoImg = document.querySelector('.logo img');
+            if (logoImg) {
+                verifyImage(logoImg.src).then(works => {
+                    if (!works) {
+                        console.log('⚠️ Logo image failed, using fallback...');
+                        logoImg.src = 'https://via.placeholder.com/50x50/0055BB/FFFFFF?text=PH';
+                    } else {
+                        console.log('✅ Logo image loaded successfully!');
+                    }
+                });
+            }
+            
+            // Verify favicon/OG images
+            const logoUrl = '{{ .Site.Params.logo_url }}';
+            verifyImage(logoUrl).then(works => {
+                console.log('🔍 Favicon/OG image verification:', works);
+                if (!works) {
+                    console.log('⚠️ Favicon/OG images may not load - this affects browser tabs and social sharing');
+                }
+            });
         });
     </script>
 </body>
