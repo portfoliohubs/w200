@@ -294,9 +294,9 @@ enableEmoji = true
 # ============================================
 [params.home.hero]
   title_en = "Built by Professionals. Designed for Success."
-  title_ar = «بنه محترفون. مصمم للنجاح."
+  title_ar = "بنه محترفون. مصمم للنجاح."
   subtitle_en = "Professional agency websites and digital solutions, ready in 48 hours—crafted with precision, delivered at digital speed."
-  subtitle_ar = «موقعك الاحترافي جاهز في 48 ساعة فقط بدقة احترافية، وسرعة التقنية الرقمية. »
+  subtitle_ar = "موقعك الاحترافي جاهز في 48 ساعة فقط بدقة احترافية، وسرعة التقنية الرقمية."
   cta_primary_en = "Start Your Project"
   cta_primary_ar = "ابدأ مشروعك"
   cta_secondary_en = "View portfolio"
