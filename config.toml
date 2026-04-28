@@ -32,7 +32,7 @@ title = "PortfolioHubs - Professional Digital Agency"
     instagram = "https://www.instagram.com/portfoliohubs?igsh=MTF3d2tzcXU0cm41cw=="
   
   # Package Image
-  packages_image = "https://github.com/user-attachments/assets/40bfd377-53c4-41c5-a506-2aed5a639aba"
+  packages_image = "https://via.placeholder.com/1080x1080/FF8000/FFFFFF?text=PortfolioHubs+Packages"
   
   # SEO Configuration
   [params.seo]
