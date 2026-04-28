@@ -1,7 +1,6 @@
 baseURL = "https://portfoliohubs.github.io/"
 languageCode = "en-us"
 title = "PortfolioHubs - Professional Digital Agency"
-theme = "portfoliohubs"
 
 [params]
   # Brand Information
