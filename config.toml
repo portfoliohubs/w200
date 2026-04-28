@@ -36,11 +36,34 @@ title = "PortfolioHubs - Professional Digital Agency"
   
   # SEO Configuration
   [params.seo]
-    description = "PortfolioHubs - Professional digital agency offering web design, development, and digital marketing services. Transform your business with our expert solutions."
+    description = "PortfolioHubs - Professional dental portfolio and CV services in Cairo, Egypt. Create stunning professional portfolios and CVs specifically designed for dental professionals."
     keywords = "digital agency, web design, development, marketing, portfolio, professional services"
     author = "PortfolioHubs Team"
     og_image = "https://github.com/user-attachments/assets/fef6c67d-5ed0-4459-b41d-4c288ab48163"
     twitter_card = "summary_large_image"
+    
+    # SEO Keywords Configuration
+    [params.seo.keywords]
+      # Core Business Keywords
+      primary = "dental portfolio, professional CV, dental CV design, portfolio creation, digital portfolio"
+      
+      # Service Keywords
+      services = "dental portfolio services, CV design for dentists, professional portfolio development, dental digital presence"
+      
+      # Location Keywords
+      location = "Cairo, Egypt, dental portfolio Cairo, Egyptian dental CV, dental services Egypt"
+      
+      # Industry Keywords
+      industry = "dental professional, dentist portfolio, dental career, dental CV template, dental resume"
+      
+      # Technical Keywords
+      technical = "portfolio design, CV creation, digital portfolio, professional portfolio, online portfolio"
+      
+      # Target Audience Keywords
+      audience = "dentists, dental students, dental professionals, dental graduates, dental specialists"
+      
+      # Combined Keywords (for meta tags)
+      meta = "dental portfolio, professional CV, Cairo Egypt, dental CV design, portfolio creation, digital portfolio, dental services, professional portfolio development, dentist portfolio, Egyptian dental CV"
   
   # GEO Configuration
   [params.geo]
@@ -49,6 +72,25 @@ title = "PortfolioHubs - Professional Digital Agency"
     latitude = "30.0444"
     longitude = "31.2357"
     country_name = "Egypt"
+    zipcode = "11511"
+    street_address = "Digital Services Center"
+    
+    # GEO Keywords Configuration
+    [params.geo.keywords]
+      # Geographic Keywords
+      primary = "Cairo Egypt, Egyptian dental services, dental portfolio Cairo, Cairo dental CV"
+      
+      # Regional Keywords
+      regional = "Egypt dental portfolio, Egyptian CV design, Cairo professional services, Egypt digital portfolio"
+      
+      # Local SEO Keywords
+      local = "dental portfolio near me, Cairo dental services, Egyptian dental professionals, local CV design"
+      
+      # International Keywords
+      international = "Egypt dental portfolio, Cairo Egypt dental, Egyptian professional CV, Middle East dental services"
+      
+      # Combined GEO Keywords (for meta tags)
+      meta = "Cairo, Egypt, Egyptian dental services, dental portfolio Cairo, Cairo dental CV, Egypt dental portfolio, Egyptian CV design, Cairo professional services"
 
 # Menu Configuration
 [menu]

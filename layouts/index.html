@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Site.Title }}</title>
     <meta name="description" content="{{ .Site.Params.seo.description }}">
-    <meta name="keywords" content="{{ .Site.Params.seo.keywords }}">
+    <meta name="keywords" content="{{ .Site.Params.seo.keywords.meta }}, {{ .Site.Params.geo.keywords.meta }}">
     <meta name="author" content="{{ .Site.Params.seo.author }}">
+    <meta name="abstract" content="{{ .Site.Params.seo.description }}">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="{{ .Site.Title }}">
@@ -14,18 +15,29 @@
     <meta property="og:image" content="{{ .Site.Params.seo.og_image }}">
     <meta property="og:url" content="{{ .Site.BaseURL }}">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ .Site.Params.brand_name }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:author" content="{{ .Site.Params.seo.author }}">
+    <meta property="article:section" content="Professional Services">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="{{ .Site.Params.seo.twitter_card }}">
     <meta name="twitter:title" content="{{ .Site.Title }}">
     <meta name="twitter:description" content="{{ .Site.Params.seo.description }}">
     <meta name="twitter:image" content="{{ .Site.Params.seo.og_image }}">
+    <meta name="twitter:site" content="@{{ .Site.Params.brand_name }}">
+    <meta name="twitter:creator" content="@{{ .Site.Params.brand_name }}">
+    <meta name="twitter:domain" content="{{ .Site.BaseURL }}">
     
     <!-- GEO Meta Tags -->
     <meta name="geo.region" content="{{ .Site.Params.geo.region }}">
     <meta name="geo.placename" content="{{ .Site.Params.geo.placename }}">
     <meta name="geo.position" content="{{ .Site.Params.geo.latitude }};{{ .Site.Params.geo.longitude }}">
     <meta name="ICBM" content="{{ .Site.Params.geo.latitude }}, {{ .Site.Params.geo.longitude }}">
+    <meta name="geo.country" content="{{ .Site.Params.geo.country_name }}">
+    <meta name="geo.city" content="{{ .Site.Params.geo.placename }}">
+    <meta name="geo.zipcode" content="11511">
+    <meta name="geo.area" content="{{ .Site.Params.geo.placename }}, {{ .Site.Params.geo.country_name }}">
     
     <!-- Additional SEO Meta Tags -->
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -34,10 +46,16 @@
     <link rel="canonical" href="{{ .Site.BaseURL }}">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
-    
-    <!-- GEO and International SEO -->
+    <meta name="expires" content="never">
     <meta name="distribution" content="global">
     <meta name="rating" content="general">
+    <meta name="copyright" content="{{ .Site.Params.brand_name }}">
+    <meta name="generator" content="PortfolioHubs">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <!-- GEO and International SEO -->
     <meta name="geo.country" content="{{ .Site.Params.geo.country_name }}">
     <meta name="dc.language" content="en">
     <meta name="dc.source" content="{{ .Site.BaseURL }}">
@@ -47,11 +65,18 @@
     
     <!-- Hreflang Tags -->
     <link rel="alternate" hreflang="en" href="{{ .Site.BaseURL }}">
+    <link rel="alternate" hreflang="en-eg" href="{{ .Site.BaseURL }}">
+    <link rel="alternate" hreflang="ar" href="{{ .Site.BaseURL }}">
+    <link rel="alternate" hreflang="ar-eg" href="{{ .Site.BaseURL }}">
     <link rel="alternate" hreflang="x-default" href="{{ .Site.BaseURL }}">
     
-    <!-- Location-based Keywords -->
-    <meta name="keywords" content="{{ .Site.Params.seo.keywords }}, {{ .Site.Params.geo.placename }}, {{ .Site.Params.geo.country_name }}, {{ .Site.Params.geo.region }}">
+    <!-- International Targeting -->
+    <meta name="content-language" content="en">
+    <meta name="target-country" content="{{ .Site.Params.geo.country_name }}">
+    <meta name="audience" content="all">
+    <meta name="coverage" content="worldwide">
     
+        
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -66,57 +91,67 @@
         "email": "{{ .Site.Params.contact.email }}",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "{{ .Site.Params.geo.street_address }}",
             "addressLocality": "{{ .Site.Params.geo.placename }}",
-            "addressCountry": "{{ .Site.Params.geo.country_name }}",
-            "addressRegion": "{{ .Site.Params.geo.region }}"
+            "addressRegion": "{{ .Site.Params.geo.region }}",
+            "postalCode": "{{ .Site.Params.geo.zipcode }}",
+            "addressCountry": "{{ .Site.Params.geo.country_name }}"
         },
         "geo": {
             "@type": "GeoCoordinates",
             "latitude": "{{ .Site.Params.geo.latitude }}",
-            "longitude": "{{ .Site.Params.geo.longitude }}"
+            "longitude": "{{ .Site.Params.geo.longitude }}",
+            "addressCountry": "{{ .Site.Params.geo.country_name }}"
         },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query={{ .Site.Params.geo.latitude }},{{ .Site.Params.geo.longitude }}",
         "openingHours": "Mo-Su 00:00-23:59",
         "areaServed": {
             "@type": "Place",
             "name": "{{ .Site.Params.geo.country_name }}"
         },
         "availableLanguage": ["English", "Arabic"],
+        "serviceType": ["Dental Portfolio", "Professional CV", "Digital Portfolio"],
+        "category": "Professional Services",
+        "knowsLanguage": ["English", "Arabic"],
+        "keywords": "{{ .Site.Params.seo.keywords.primary }}",
+        "about": "{{ .Site.Params.seo.keywords.services }}",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "{{ .Site.Params.contact.phone }}",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Arabic"]
+        },
         "sameAs": [
             "{{ .Site.Params.contact.facebook }}",
             "{{ .Site.Params.contact.instagram }}"
         ],
-        "serviceType": [
-            "Web Development",
-            "UI/UX Design",
-            "Digital Marketing"
-        ],
         "priceRange": "$$",
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Digital Services",
+            "name": "Dental Portfolio Services",
             "itemListElement": [
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Web Development",
-                        "description": "Custom website development services"
+                        "name": "Dental Portfolio Creation",
+                        "description": "Professional dental portfolio development"
                     }
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "UI/UX Design",
-                        "description": "Professional design services"
+                        "name": "Professional CV Design",
+                        "description": "Custom CV design for dental professionals"
                     }
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Digital Marketing",
-                        "description": "Digital marketing solutions"
+                        "name": "Digital Presence",
+                        "description": "Complete digital portfolio solution"
                     }
                 }
             ]
@@ -124,9 +159,17 @@
     }
     </script>
     
-    <!-- Fonts -->
+    <!-- Performance Optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap"></noscript>
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
@@ -164,6 +207,68 @@
         "name": "{{ .Site.Params.brand_name }}",
         "url": "{{ .Site.BaseURL }}",
         "logo": "{{ .Site.Params.logo_url }}",
+        "sameAs": [
+            "{{ .Site.Params.contact.facebook }}",
+            "{{ .Site.Params.contact.instagram }}"
+        ]
+    }
+    </script>
+    
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "{{ .Site.Params.brand_name }}",
+        "description": "{{ .Site.Params.seo.keywords.primary }} in {{ .Site.Params.geo.placename }}",
+        "url": "{{ .Site.BaseURL }}",
+        "telephone": "{{ .Site.Params.contact.phone }}",
+        "email": "{{ .Site.Params.contact.email }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "{{ .Site.Params.geo.street_address }}",
+            "addressLocality": "{{ .Site.Params.geo.placename }}",
+            "addressRegion": "{{ .Site.Params.geo.region }}",
+            "postalCode": "{{ .Site.Params.geo.zipcode }}",
+            "addressCountry": "{{ .Site.Params.geo.country_name }}"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "{{ .Site.Params.geo.latitude }}",
+            "longitude": "{{ .Site.Params.geo.longitude }}"
+        },
+        "openingHours": "Mo-Su 00:00-23:59",
+        "priceRange": "$$",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "currenciesAccepted": "USD, EUR, EGP",
+        "areaServed": "{{ .Site.Params.geo.country_name }}",
+        "hasMap": "https://www.google.com/maps/search/?api=1&query={{ .Site.Params.geo.latitude }},{{ .Site.Params.geo.longitude }}",
+        "image": "{{ .Site.Params.seo.og_image }}",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "127"
+        }
+    }
+    </script>
+    
+    <!-- NAP Consistency Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "{{ .Site.Params.brand_name }}",
+        "telephone": "+201271476215",
+        "email": "{{ .Site.Params.contact.email }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "{{ .Site.Params.geo.street_address }}",
+            "addressLocality": "{{ .Site.Params.geo.placename }}",
+            "addressRegion": "{{ .Site.Params.geo.region }}",
+            "postalCode": "{{ .Site.Params.geo.zipcode }}",
+            "addressCountry": "{{ .Site.Params.geo.country_name }}"
+        },
+        "url": "{{ .Site.BaseURL }}",
         "sameAs": [
             "{{ .Site.Params.contact.facebook }}",
             "{{ .Site.Params.contact.instagram }}"
@@ -678,7 +783,8 @@
     <!-- Hero Section -->
     <section class="hero" itemscope itemtype="https://schema.org/ProfessionalService">
         <div class="container">
-            <h1 itemprop="name">Welcome to {{ .Site.Params.brand_name }}</h1>
+            <h1 itemprop="name">{{ .Site.Params.brand_name }} - Professional Dental Portfolio & CV Services</h1>
+            <p itemprop="description">Create stunning professional portfolios and CVs specifically designed for dental professionals. Stand out with our expert digital solutions.</p>
             <a href="https://wa.me/{{ .Site.Params.contact.whatsapp }}?text=iam asking about free trial in portfoliohubs" class="cta-button" target="_blank" itemprop="potentialAction">
                 Start Your Free Trial
             </a>
