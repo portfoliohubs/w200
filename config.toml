@@ -37,7 +37,6 @@ title = "PortfolioHubs - Professional Digital Agency"
   # SEO Configuration
   [params.seo]
     description = "PortfolioHubs - Professional dental portfolio and CV services in Cairo, Egypt. Create stunning professional portfolios and CVs specifically designed for dental professionals."
-    keywords = "digital agency, web design, development, marketing, portfolio, professional services"
     author = "PortfolioHubs Team"
     og_image = "https://github.com/user-attachments/assets/fef6c67d-5ed0-4459-b41d-4c288ab48163"
     twitter_card = "summary_large_image"
