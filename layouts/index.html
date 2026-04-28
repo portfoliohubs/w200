@@ -634,7 +634,7 @@
         <div class="container">
             <h2 class="section-title">Our Packages</h2>
             <div class="packages-container">
-                <img src="{{ .Site.Params.packages_image }}" alt="PortfolioHubs Packages" class="packages-image" loading="lazy" onclick="window.open('https://wa.me/{{ .Site.Params.contact.whatsapp }}', '_blank')">
+                <img src="{{ .Site.Params.packages_image }}" alt="PortfolioHubs Packages" class="packages-image" loading="lazy" onclick="window.open('https://wa.me/{{ .Site.Params.contact.whatsapp }}', '_blank')" onerror="tryAlternativeImage(this);">
             </div>
         </div>
     </section>
@@ -709,6 +709,19 @@
                 });
             });
         });
+        
+        // Fallback function for package image
+        function tryAlternativeImage(img) {
+            if (!img.dataset.tried) {
+                img.dataset.tried = 'true';
+                // Try raw GitHub URL
+                img.src = 'https://raw.githubusercontent.com/user-attachments/assets/40bfd377-53c4-41c5-a506-2aed5a639aba';
+            } else {
+                // Final fallback to placeholder
+                img.src = 'https://via.placeholder.com/1080x1080/FF8000/FFFFFF?text=PortfolioHubs+Packages';
+                img.onerror = null;
+            }
+        }
     </script>
 </body>
 </html>
