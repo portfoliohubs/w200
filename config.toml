@@ -9,7 +9,7 @@ theme = "portfoliohubs"
   logo_url = "https://github.com/user-attachments/assets/fef6c67d-5ed0-4459-b41d-4c288ab48163"
   
   # Color Scheme
-  colors = {
+  [params.colors]
     background = "#C5D1D5"
     cta_button = "#FF8000"
     text = "#000000"
@@ -17,44 +17,39 @@ theme = "portfoliohubs"
     brand_text = "#FFFFFF"
     cta_background = "#FFFFFC"
     cta_text = "#FF8000"
-  }
   
   # Typography
-  fonts = {
+  [params.fonts]
     primary = "Almarai"
     bold = "Almarai Bold"
     extra_bold = "Almarai ExtraBold"
-  }
   
   # Contact Information
-  contact = {
+  [params.contact]
     whatsapp = "+201271476215"
     phone = "+201271476215"
     email = "portfoliohubs.contact@gmail.com"
     facebook = "https://www.facebook.com/share/1DhxaHUvpk/"
     instagram = "https://www.instagram.com/portfoliohubs?igsh=MTF3d2tzcXU0cm41cw=="
-  }
   
   # Package Image
   packages_image = "https://github.com/user-attachments/assets/40bfd377-53c4-41c5-a506-2aed5a639aba"
   
   # SEO Configuration
-  seo = {
+  [params.seo]
     description = "PortfolioHubs - Professional digital agency offering web design, development, and digital marketing services. Transform your business with our expert solutions."
     keywords = "digital agency, web design, development, marketing, portfolio, professional services"
     author = "PortfolioHubs Team"
     og_image = "https://github.com/user-attachments/assets/fef6c67d-5ed0-4459-b41d-4c288ab48163"
     twitter_card = "summary_large_image"
-  }
   
   # GEO Configuration
-  geo = {
+  [params.geo]
     region = "EG"
     placename = "Cairo"
     latitude = "30.0444"
     longitude = "31.2357"
     country_name = "Egypt"
-  }
 
 # Menu Configuration
 [menu]
