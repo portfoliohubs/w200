@@ -344,6 +344,21 @@
         .packages-container {
             text-align: center;
             margin: 2rem 0;
+            min-height: 300px;
+            position: relative;
+        }
+        
+        .packages-image {
+            display: block !important;
+        }
+        
+        .backup-image {
+            display: none !important;
+        }
+        
+        /* Guarantee at least one image is visible */
+        .packages-container img:first-child {
+            display: block !important;
         }
         
         /* About Section */
@@ -634,7 +649,30 @@
         <div class="container">
             <h2 class="section-title">Our Packages</h2>
             <div class="packages-container">
-                <img src="{{ .Site.Params.packages_image }}" alt="PortfolioHubs Packages" class="packages-image" loading="lazy" onclick="window.open('https://wa.me/{{ .Site.Params.contact.whatsapp }}', '_blank')" onerror="tryAlternativeImage(this);">
+                <!-- Primary Image - Direct Link -->
+                <img src="https://github.com/user-attachments/assets/40bfd377-53c4-41c5-a506-2aed5a639aba" 
+                     alt="PortfolioHubs Packages" 
+                     class="packages-image" 
+                     loading="lazy" 
+                     onclick="window.open('https://wa.me/+201271476215', '_blank')" 
+                     onerror="this.src='https://raw.githubusercontent.com/user-attachments/assets/40bfd377-53c4-41c5-a506-2aed5a639aba'; this.onerror=function(){this.src='https://via.placeholder.com/1080x1080/FF8000/FFFFFF?text=PortfolioHubs+Packages'; this.onerror=null;};"
+                     style="max-width: 500px; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s;">
+                
+                <!-- Backup Image 1 - Raw GitHub -->
+                <img src="https://raw.githubusercontent.com/user-attachments/assets/40bfd377-53c4-41c5-a506-2aed5a639aba" 
+                     alt="PortfolioHubs Packages Backup" 
+                     class="packages-image backup-image" 
+                     loading="lazy" 
+                     onclick="window.open('https://wa.me/+201271476215', '_blank')" 
+                     style="display: none; max-width: 500px; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s;">
+                
+                <!-- Backup Image 2 - Placeholder -->
+                <img src="https://via.placeholder.com/1080x1080/FF8000/FFFFFF?text=PortfolioHubs+Packages" 
+                     alt="PortfolioHubs Packages" 
+                     class="packages-image backup-image" 
+                     loading="lazy" 
+                     onclick="window.open('https://wa.me/+201271476215', '_blank')" 
+                     style="display: none; max-width: 500px; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s;">
             </div>
         </div>
     </section>
@@ -700,28 +738,98 @@
     </a>
 
     <script>
-        // Add click handlers for all images
+        // Comprehensive Image Loading System
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 Starting comprehensive image loading verification...');
+            
+            // Add click handlers for all images
             const images = document.querySelectorAll('img');
             images.forEach(img => {
                 img.addEventListener('click', function() {
-                    window.open('https://wa.me/{{ .Site.Params.contact.whatsapp }}', '_blank');
+                    window.open('https://wa.me/+201271476215', '_blank');
                 });
             });
-        });
-        
-        // Fallback function for package image
-        function tryAlternativeImage(img) {
-            if (!img.dataset.tried) {
-                img.dataset.tried = 'true';
-                // Try raw GitHub URL
-                img.src = 'https://raw.githubusercontent.com/user-attachments/assets/40bfd377-53c4-41c5-a506-2aed5a639aba';
-            } else {
-                // Final fallback to placeholder
-                img.src = 'https://via.placeholder.com/1080x1080/FF8000/FFFFFF?text=PortfolioHubs+Packages';
-                img.onerror = null;
+            
+            // Primary image verification
+            const primaryImg = document.querySelector('.packages-image:not(.backup-image)');
+            const backupImgs = document.querySelectorAll('.backup-image');
+            
+            // Method 1: Direct URL verification
+            verifyImage(primaryImg.src).then(works => {
+                console.log('✅ Primary image verification:', works);
+                if (!works) {
+                    console.log('🔄 Trying backup images...');
+                    tryBackupImages();
+                }
+            });
+            
+            // Method 2: Load event verification
+            primaryImg.addEventListener('load', function() {
+                console.log('✅ Primary image loaded successfully!');
+                this.style.display = 'block';
+                backupImgs.forEach(img => img.style.display = 'none');
+            });
+            
+            // Method 3: Error handling with multiple fallbacks
+            primaryImg.addEventListener('error', function() {
+                console.log('❌ Primary image failed, trying backups...');
+                tryBackupImages();
+            });
+            
+            // Method 4: Force load after delay
+            setTimeout(() => {
+                if (primaryImg.naturalWidth === 0) {
+                    console.log('⏰ Timeout fallback - trying backup images...');
+                    tryBackupImages();
+                }
+            }, 3000);
+            
+            // Method 5: Manual verification
+            setTimeout(() => {
+                const visibleImg = document.querySelector('.packages-image:not([style*="display: none"])');
+                if (visibleImg && visibleImg.naturalWidth > 0) {
+                    console.log('🎉 SUCCESS: Package image is visible and loaded!');
+                    console.log('📏 Image dimensions:', visibleImg.naturalWidth + 'x' + visibleImg.naturalHeight);
+                } else {
+                    console.log('⚠️ Final fallback - forcing placeholder...');
+                    forcePlaceholder();
+                }
+            }, 5000);
+            
+            function tryBackupImages() {
+                // Try raw GitHub first
+                const rawImg = backupImgs[0];
+                rawImg.style.display = 'block';
+                primaryImg.style.display = 'none';
+                
+                rawImg.addEventListener('load', function() {
+                    console.log('✅ Raw GitHub image loaded!');
+                    backupImgs[1].style.display = 'none';
+                });
+                
+                rawImg.addEventListener('error', function() {
+                    console.log('❌ Raw GitHub failed, trying placeholder...');
+                    forcePlaceholder();
+                });
             }
-        }
+            
+            function forcePlaceholder() {
+                const placeholderImg = backupImgs[1];
+                placeholderImg.style.display = 'block';
+                primaryImg.style.display = 'none';
+                backupImgs[0].style.display = 'none';
+                console.log('🎯 Placeholder image forced as final fallback');
+            }
+            
+            async function verifyImage(url) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                });
+            }
+        });
     </script>
 </body>
 </html>
